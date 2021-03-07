@@ -1,8 +1,8 @@
 <h2>Top Heroes</h2>
 <div class="heroes-menu">
-  <a *ngFor="let hero of heroes"
-      routerLink="/detail/{{hero.id}}">
-      {{hero.name}}, {{hero.pet}}
+  <a *ngFor="let hero of heroes" routerLink="/detail/{{hero.id}}">
+    <a *ngIf="hero.pet;else block">{{hero.name}}, {{hero.pet}}</a>
+    <ng-template #block> {{hero.name}} </ng-template>
   </a>
 </div>
 

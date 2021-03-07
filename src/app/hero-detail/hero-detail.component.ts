@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
+import { PetsService } from '../pets.service';
 import { Pet } from '../pet';
 
 @Component({
@@ -18,11 +19,30 @@ export class HeroDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private heroService: HeroService,
+    private petService: PetsService,
     private location: Location
   ) {}
 
   ngOnInit(): void {
     this.getHero();
+  }
+
+  verifica(input):void{
+   const pets = this.petService.getPets();
+   let encontrou = false;
+
+   for(let pet of pets){
+     console.log(pet.name)
+     if(input == pet.name){
+       this.save();
+       encontrou = true;
+       break;
+     }
+   }
+   if(!encontrou){
+     alert("o pet não existe");
+   }
+   console.log(input); 
   }
 
   getHero(): void {
